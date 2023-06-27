@@ -31,7 +31,7 @@ fun Navigation(
         }
 
         composable(Screen.Detail.route) {
-            DetailsScreen()
+            DetailsScreen(bookViewModel, navController)
         }
     }
 }
