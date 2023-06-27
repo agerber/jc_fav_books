@@ -34,7 +34,13 @@ fun Navigation(
             ContactScreen(navController)
         }
 
-        composable(Screen.Detail.route) {
+        composable(Screen.Detail.route,
+            enterTransition = {
+                slideIntoContainer(AnimatedContentScope.SlideDirection.Right, animationSpec = tween(300))
+            },
+            exitTransition = {
+                slideOutOfContainer(AnimatedContentScope.SlideDirection.Left, animationSpec = tween(300))
+            },) {
             DetailsScreen(bookViewModel, navController)
         }
     }
