@@ -17,6 +17,9 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import edu.uchicago.gerber.favs.authorization.AmplifyService
 import edu.uchicago.gerber.favs.authorization.AmplifyServiceImpl
+import edu.uchicago.gerber.favs.authorization.LoginState
+import edu.uchicago.gerber.favs.authorization.SignUpState
+import edu.uchicago.gerber.favs.authorization.VerificationCodeState
 import edu.uchicago.gerber.favs.presentation.navigation.Screen
 import edu.uchicago.gerber.favs.presentation.viewmodels.BookViewModel
 import kotlinx.coroutines.Dispatchers
@@ -27,7 +30,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SignUpScreen(viewModel: BookViewModel, navController: NavController, amplifyService: AmplifyService) {
-    val state by viewModel.signUpState
+    //val state by viewModel.signUpState
 
 
     Column(
@@ -36,20 +39,20 @@ fun SignUpScreen(viewModel: BookViewModel, navController: NavController, amplify
         modifier = Modifier.fillMaxSize()
     ) {
         TextField(
-            value = state.username,
-            onValueChange = { viewModel.updateSignUpState(username = it) },
+            value = viewModel.username.value,
+            onValueChange = { viewModel.setUsername(it) },
             placeholder = { Text(text = "Username") }
         )
 
         TextField(
-            value = state.email,
-            onValueChange = { viewModel.updateSignUpState(email = it) },
+            value = viewModel.email.value,
+            onValueChange = { viewModel.setEmail(it)},
             placeholder = { Text(text = "Email") }
         )
 
         TextField(
-            value = state.password,
-            onValueChange = { viewModel.updateSignUpState(password = it) },
+            value = viewModel.password.value,
+            onValueChange = { viewModel.setPassword(it) },
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             placeholder = { Text(text = "Password") }
@@ -57,7 +60,7 @@ fun SignUpScreen(viewModel: BookViewModel, navController: NavController, amplify
 
 
         Button(onClick = {
-            amplifyService.signUp(viewModel.signUpState.value){
+            amplifyService.signUp(SignUpState(viewModel.username.value, viewModel.email.value, viewModel.password.value)){
                 MainScope().launch {
                     navController.navigate(route = Screen.Verify.route)
                 }
@@ -77,7 +80,7 @@ fun SignUpScreen(viewModel: BookViewModel, navController: NavController, amplify
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(viewModel: BookViewModel, navController: NavController, amplifyService: AmplifyService) {
-    val state by viewModel.loginState
+
 
     Column(
         verticalArrangement = Arrangement.spacedBy(10.dp, alignment = Alignment.CenterVertically),
@@ -85,14 +88,14 @@ fun LoginScreen(viewModel: BookViewModel, navController: NavController, amplifyS
         modifier = Modifier.fillMaxSize()
     ) {
         TextField(
-            value = state.username,
-            onValueChange = { viewModel.updateLoginState(username = it) },
+            value = viewModel.username.value,
+            onValueChange = { viewModel.setUsername(it) },
             placeholder = { Text(text = "Username") }
         )
 
         TextField(
-            value = state.password,
-            onValueChange = { viewModel.updateLoginState(password = it) },
+            value = viewModel.password.value,
+            onValueChange = { viewModel.setPassword(it)  },
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             placeholder = { Text(text = "Password") }
@@ -100,7 +103,7 @@ fun LoginScreen(viewModel: BookViewModel, navController: NavController, amplifyS
 
         Button(onClick =   {
 
-            amplifyService.login(viewModel.loginState.value){
+            amplifyService.login(LoginState(viewModel.username.value, viewModel.password.value)){
                 MainScope().launch {
                     navController.navigate(route = Screen.Search.route)
                 }
@@ -121,7 +124,7 @@ fun LoginScreen(viewModel: BookViewModel, navController: NavController, amplifyS
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun VerifyScreen(viewModel: BookViewModel, navController: NavController, amplifyService: AmplifyService) {
-    val state by viewModel.verificationCodeState
+
 
     Column(
         verticalArrangement = Arrangement.spacedBy(10.dp, alignment = Alignment.CenterVertically),
@@ -129,14 +132,14 @@ fun VerifyScreen(viewModel: BookViewModel, navController: NavController, amplify
         modifier = Modifier.fillMaxSize()
     ) {
         TextField(
-            value = state.code,
-            onValueChange = { viewModel.updateVerificationCodeState(code = it) },
+            value = viewModel.code.value,
+            onValueChange = { viewModel.setCode(it) },
             placeholder = { Text(text = "Verification Code") }
         )
 
         Button(onClick = {
 
-            amplifyService.verifyCode(viewModel.verificationCodeState.value){
+            amplifyService.verifyCode(VerificationCodeState(viewModel.username.value, viewModel.code.value)){
                 MainScope().launch {
                     navController.navigate(route = Screen.Login.route)
                 }

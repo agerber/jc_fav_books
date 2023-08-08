@@ -30,11 +30,10 @@ class BookViewModel : ViewModel() {
     private val booksRepository: BooksRepository = BooksRepository(ApiProvider.booksApi())
 
     //////////////////////////////////////////
-    // MUTABLE-STATES AND OBSERVABLE STATES
+    // MUTABLE-STATES AND OBSERVABLE STATES for BOOKS
     //////////////////////////////////////////
     private var _queryText = mutableStateOf("")
     val queryText: State<String> = _queryText
-
 
     private var _book = mutableStateOf(Constants.fakeBook)
     val book: State<Item> = _book
@@ -43,8 +42,41 @@ class BookViewModel : ViewModel() {
     val searchState: State<SearchState> = _searchState
 
     //////////////////////////////////////////
+    // MUTABLE-STATES AND OBSERVABLE STATES for AUTHENTICATION
+    //////////////////////////////////////////
+    private var _username = mutableStateOf("")
+    val username: State<String> = _username
+
+    private var _email = mutableStateOf("")
+    val email: State<String> = _email
+
+    private var _password = mutableStateOf("")
+    val password: State<String> = _password
+
+    private var _code = mutableStateOf("")
+    val code: State<String> = _code
+
+
+
+    //////////////////////////////////////////
     // FUNCTIONS
     //////////////////////////////////////////
+    fun setUsername(text: String){
+        _username.value = text
+    }
+    fun setEmail(text: String){
+        _email.value = text
+    }
+
+    fun setPassword(text: String){
+        _password.value = text
+    }
+
+    fun setCode(text: String){
+        _code.value = text
+    }
+
+
     fun setBook(book: Item) {
         _book.value = book
     }
@@ -75,85 +107,6 @@ class BookViewModel : ViewModel() {
     }
 
 
-    ////////////////////
-
-
-    var loginState = mutableStateOf(LoginState())
-        private set
-
-    var signUpState = mutableStateOf(SignUpState())
-        private set
-
-    var verificationCodeState = mutableStateOf(VerificationCodeState())
-        private set
-
-    fun updateSignUpState(username: String? = null, email: String? = null, password: String? = null) {
-        viewModelScope.launch {
-            username?.let {
-                signUpState.value = signUpState.value.copy(username = it)
-                verificationCodeState.value = verificationCodeState.value.copy(username = it)
-            }
-            email?.let { signUpState.value = signUpState.value.copy(email = it) }
-            password?.let { signUpState.value = signUpState.value.copy(password = it) }
-        }
-    }
-
-    fun updateLoginState(username: String? = null, password: String? = null) {
-        viewModelScope.launch {
-            username?.let { loginState.value = loginState.value.copy(username = it) }
-            password?.let { loginState.value = loginState.value.copy(password = it) }
-        }
-    }
-
-    fun updateVerificationCodeState(code: String) {
-        viewModelScope.launch {
-            verificationCodeState.value = verificationCodeState.value.copy(code = code)
-        }
-    }
-
-//    fun configureAmplify(context: Context) {
-//        amplifyService.configureAmplify(context)
-//    }
-//
-//    fun showSignUp() {
-//        navigateTo("signUp")
-//    }
-//
-//    fun showLogin() {
-//        navigateTo("login")
-//    }
-//
-//    fun signUp() {
-//        amplifyService.signUp(signUpState.value) {
-//            viewModelScope.launch(Dispatchers.Main) {
-//                navigateTo("verify")
-//            }
-//        }
-//    }
-//
-//    fun verifyCode() {
-//        amplifyService.verifyCode(verificationCodeState.value) {
-//            viewModelScope.launch(Dispatchers.Main) {
-//                navigateTo("login")
-//            }
-//        }
-//    }
-//
-//    fun login() {
-//        amplifyService.login(loginState.value) {
-//            viewModelScope.launch(Dispatchers.Main) {
-//
-//            }
-//        }
-//    }
-//
-//    fun logOut() {
-//        amplifyService.logOut {
-//            viewModelScope.launch(Dispatchers.Main) {
-//                navigateTo("login")
-//            }
-//        }
-//    }
 
 
 }
