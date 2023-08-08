@@ -9,6 +9,8 @@ import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import edu.uchicago.gerber.favs.presentation.screens.auth.LoginScreen
+import edu.uchicago.gerber.favs.presentation.screens.auth.SignUpScreen
+import edu.uchicago.gerber.favs.presentation.screens.auth.VerifyScreen
 import edu.uchicago.gerber.favs.presentation.screens.contact.ContactScreen
 import edu.uchicago.gerber.favs.presentation.screens.details.DetailsScreen
 import edu.uchicago.gerber.favs.presentation.screens.favorites.FavoritesScreen
@@ -51,11 +53,11 @@ fun Navigation(
         }
 
         composable(Screen.SignUp.route) {
-            LoginScreen(bookViewModel, navController)
+            SignUpScreen(bookViewModel, navController)
         }
 
         composable(Screen.Verify.route) {
-            LoginScreen(bookViewModel, navController)
+            VerifyScreen(bookViewModel, navController)
         }
 
 

@@ -98,7 +98,7 @@ fun LoginScreen(viewModel: BookViewModel, navController: NavController) {
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun VerificationCodeScreen(viewModel: BookViewModel, navController: NavController) {
+fun VerifyScreen(viewModel: BookViewModel, navController: NavController) {
     val state by viewModel.verificationCodeState
 
     Column(
