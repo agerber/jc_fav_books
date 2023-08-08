@@ -1,6 +1,5 @@
 package edu.uchicago.gerber.favs.presentation.widgets
 
-import android.content.Intent
 import androidx.compose.foundation.layout.fillMaxWidth
 
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -21,9 +20,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import androidx.core.content.ContextCompat.startActivity
-import com.amazonaws.mobile.client.AWSMobileClient
-import edu.uchicago.gerber.favs.AuthActivity
 
 import edu.uchicago.gerber.favs.R
 
