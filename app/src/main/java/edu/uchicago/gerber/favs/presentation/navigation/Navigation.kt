@@ -8,6 +8,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
+import edu.uchicago.gerber.favs.authorization.AmplifyService
+import edu.uchicago.gerber.favs.authorization.AmplifyServiceImpl
 import edu.uchicago.gerber.favs.presentation.screens.auth.LoginScreen
 import edu.uchicago.gerber.favs.presentation.screens.auth.SignUpScreen
 import edu.uchicago.gerber.favs.presentation.screens.auth.VerifyScreen
@@ -21,7 +23,8 @@ import edu.uchicago.gerber.favs.presentation.viewmodels.BookViewModel
 @Composable
 fun Navigation(
     navController: NavHostController,
-    bookViewModel: BookViewModel = viewModel()
+    bookViewModel: BookViewModel = viewModel(),
+    amplifyService: AmplifyService
 ) {
 
     AnimatedNavHost(navController, startDestination = Screen.Login.route) {
@@ -49,15 +52,15 @@ fun Navigation(
 
         //routes for authorization
         composable(Screen.Login.route) {
-            LoginScreen(bookViewModel, navController)
+            LoginScreen(bookViewModel, navController, amplifyService)
         }
 
         composable(Screen.SignUp.route) {
-            SignUpScreen(bookViewModel, navController)
+            SignUpScreen(bookViewModel, navController, amplifyService)
         }
 
         composable(Screen.Verify.route) {
-            VerifyScreen(bookViewModel, navController)
+            VerifyScreen(bookViewModel, navController, amplifyService)
         }
 
 

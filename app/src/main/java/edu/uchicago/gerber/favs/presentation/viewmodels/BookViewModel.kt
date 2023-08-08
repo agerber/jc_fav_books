@@ -26,6 +26,7 @@ import kotlinx.coroutines.launch
 
 class BookViewModel : ViewModel() {
 
+
     private val booksRepository: BooksRepository = BooksRepository(ApiProvider.booksApi())
 
     //////////////////////////////////////////
@@ -76,7 +77,6 @@ class BookViewModel : ViewModel() {
 
     ////////////////////
 
-    private val amplifyService: AmplifyService = AmplifyServiceImpl()
 
     lateinit var navigateTo: (String) -> Unit
 
@@ -107,9 +107,9 @@ class BookViewModel : ViewModel() {
         verificationCodeState.value = verificationCodeState.value.copy(code = code)
     }
 
-    fun configureAmplify(context: Context) {
-        amplifyService.configureAmplify(context)
-    }
+//    fun configureAmplify(context: Context) {
+//        amplifyService.configureAmplify(context)
+//    }
 //
 //    fun showSignUp() {
 //        navigateTo("signUp")

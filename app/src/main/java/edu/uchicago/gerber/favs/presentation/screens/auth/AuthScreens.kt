@@ -14,6 +14,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import edu.uchicago.gerber.favs.authorization.AmplifyService
+import edu.uchicago.gerber.favs.authorization.AmplifyServiceImpl
 import edu.uchicago.gerber.favs.presentation.navigation.Screen
 import edu.uchicago.gerber.favs.presentation.viewmodels.BookViewModel
 
@@ -22,8 +24,9 @@ import edu.uchicago.gerber.favs.presentation.viewmodels.BookViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpScreen(viewModel: BookViewModel, navController: NavController) {
+fun SignUpScreen(viewModel: BookViewModel, navController: NavController, amplifyService: AmplifyService) {
     val state by viewModel.signUpState
+
 
     Column(
         verticalArrangement = Arrangement.spacedBy(10.dp, alignment = Alignment.CenterVertically),
@@ -52,7 +55,10 @@ fun SignUpScreen(viewModel: BookViewModel, navController: NavController) {
 
 
         Button(onClick = {
-            navController.navigate(route = Screen.SignUp.route)
+            amplifyService.signUp(viewModel.signUpState.value){
+                navController.navigate(route = Screen.SignUp.route)
+            }
+
 
         }) {
             Text(text = "Sign Up")
@@ -65,7 +71,7 @@ fun SignUpScreen(viewModel: BookViewModel, navController: NavController) {
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(viewModel: BookViewModel, navController: NavController) {
+fun LoginScreen(viewModel: BookViewModel, navController: NavController, amplifyService: AmplifyService) {
     val state by viewModel.loginState
 
     Column(
@@ -98,7 +104,7 @@ fun LoginScreen(viewModel: BookViewModel, navController: NavController) {
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun VerifyScreen(viewModel: BookViewModel, navController: NavController) {
+fun VerifyScreen(viewModel: BookViewModel, navController: NavController, amplifyService: AmplifyService) {
     val state by viewModel.verificationCodeState
 
     Column(

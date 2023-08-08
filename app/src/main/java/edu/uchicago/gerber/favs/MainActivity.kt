@@ -14,11 +14,15 @@ import edu.uchicago.gerber.favs.ui.theme.FavoriteBooksTheme
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import edu.uchicago.gerber.favs.presentation.navigation.Navigation
 import androidx.compose.animation.ExperimentalAnimationApi
+import edu.uchicago.gerber.favs.authorization.AmplifyService
+import edu.uchicago.gerber.favs.authorization.AmplifyServiceImpl
 
 @OptIn(ExperimentalAnimationApi::class)
 class MainActivity : ComponentActivity() {
+    private val amplifyService: AmplifyService = AmplifyServiceImpl()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        amplifyService.configureAmplify(this)
         setContent {
             FavoriteBooksTheme {
                 val navController = rememberAnimatedNavController()
@@ -26,7 +30,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Navigation(navController = navController)
+                    Navigation(navController = navController, amplifyService = amplifyService)
                 }
             }
         }
