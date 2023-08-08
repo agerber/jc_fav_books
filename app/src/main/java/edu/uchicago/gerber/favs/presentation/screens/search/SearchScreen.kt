@@ -11,26 +11,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import edu.uchicago.gerber.favs.common.Constants
 import edu.uchicago.gerber.favs.presentation.screens.search.paging.BookList
 import edu.uchicago.gerber.favs.presentation.screens.search.paging.SearchOperation
 import edu.uchicago.gerber.favs.presentation.viewmodels.BookViewModel
-import edu.uchicago.gerber.favs.presentation.widgets.BottomNavigationBar
+import edu.uchicago.gerber.favs.presentation.widgets.CustomBottomNavigationBar
 import edu.uchicago.gerber.favs.presentation.widgets.CustomOutlinedTextField
 import edu.uchicago.gerber.favs.presentation.widgets.CustomTopBar
 
@@ -45,7 +37,7 @@ fun SearchScreen(
 
     Scaffold(
         modifier = Constants.modifier,
-        bottomBar = { BottomNavigationBar(navController) },
+        bottomBar = { CustomBottomNavigationBar(navController) },
         topBar = {
             CustomTopBar(titleText = "Search Books")
         }
