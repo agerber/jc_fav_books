@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import edu.uchicago.gerber.favs.common.Constants
 import edu.uchicago.gerber.favs.presentation.widgets.BottomNavigationBar
+import edu.uchicago.gerber.favs.presentation.widgets.CustomTopBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -31,22 +32,7 @@ fun ContactScreen(navController: NavController) {
         modifier = Constants.modifier,
         bottomBar = { BottomNavigationBar(navController) },
         topBar = {
-            TopAppBar(
-                colors = TopAppBarDefaults.smallTopAppBarColors(
-                    containerColor = Color.Transparent
-                ),
-                title = {
-                    Text(
-                        text = "Contact Us",
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        style = TextStyle(color = Color.Black, fontWeight = FontWeight.Bold),
-                        textAlign = TextAlign.Center,
-                        fontSize = 20.sp
-                    )
-
-                }
-                )
+            CustomTopBar(titleText = "Contact Us")
         }
     ) {
             paddingValues ->

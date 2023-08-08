@@ -32,6 +32,7 @@ import edu.uchicago.gerber.favs.presentation.screens.search.paging.SearchOperati
 import edu.uchicago.gerber.favs.presentation.viewmodels.BookViewModel
 import edu.uchicago.gerber.favs.presentation.widgets.BottomNavigationBar
 import edu.uchicago.gerber.favs.presentation.widgets.CustomOutlinedTextField
+import edu.uchicago.gerber.favs.presentation.widgets.CustomTopBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -46,22 +47,7 @@ fun SearchScreen(
         modifier = Constants.modifier,
         bottomBar = { BottomNavigationBar(navController) },
         topBar = {
-            TopAppBar(
-                colors = TopAppBarDefaults.smallTopAppBarColors(
-                    containerColor = Color.Transparent
-                ),
-                title = {
-                    Text(
-                        text = "Search Books",
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        style = TextStyle(color = Color.Black, fontWeight = FontWeight.Bold),
-                        textAlign = TextAlign.Center,
-                        fontSize = 20.sp
-                    )
-
-                }
-            )
+            CustomTopBar(titleText = "Search Books")
         }
     ) { paddingValues ->
         Column(
