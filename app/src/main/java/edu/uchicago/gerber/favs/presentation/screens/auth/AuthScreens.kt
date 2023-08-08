@@ -59,7 +59,7 @@ fun SignUpScreen(viewModel: BookViewModel, navController: NavController, amplify
         Button(onClick = {
             amplifyService.signUp(viewModel.signUpState.value){
                 MainScope().launch {
-                    navController.navigate(route = Screen.SignUp.route)
+                    navController.navigate(route = Screen.Verify.route)
                 }
 
             }
