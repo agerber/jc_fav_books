@@ -13,6 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import edu.uchicago.gerber.favs.presentation.navigation.Screen
 import edu.uchicago.gerber.favs.presentation.viewmodels.BookViewModel
 
 
@@ -20,7 +22,7 @@ import edu.uchicago.gerber.favs.presentation.viewmodels.BookViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpScreen(viewModel: BookViewModel) {
+fun SignUpScreen(viewModel: BookViewModel, navController: NavController) {
     val state by viewModel.signUpState
 
     Column(
@@ -48,18 +50,22 @@ fun SignUpScreen(viewModel: BookViewModel) {
             placeholder = { Text(text = "Password") }
         )
 
-        Button(onClick = viewModel::signUp) {
+
+        Button(onClick = {
+            navController.navigate(route = Screen.SignUp.route)
+
+        }) {
             Text(text = "Sign Up")
         }
 
-        TextButton(onClick = viewModel::showLogin) {
+        TextButton(onClick = {navController.navigate(route = Screen.Login.route)}) {
             Text(text = "Already have an account? Login.")
         }
     }
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(viewModel: BookViewModel) {
+fun LoginScreen(viewModel: BookViewModel, navController: NavController) {
     val state by viewModel.loginState
 
     Column(
@@ -81,18 +87,18 @@ fun LoginScreen(viewModel: BookViewModel) {
             placeholder = { Text(text = "Password") }
         )
 
-        Button(onClick = viewModel::login) {
+        Button(onClick =   { navController.navigate(route = Screen.Login.route)}) {
             Text(text = "Login")
         }
 
-        TextButton(onClick = viewModel::showSignUp) {
+        TextButton(onClick = { navController.navigate(route = Screen.SignUp.route)}) {
             Text(text = "Don't have an account? Sign up.")
         }
     }
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun VerificationCodeScreen(viewModel: BookViewModel) {
+fun VerificationCodeScreen(viewModel: BookViewModel, navController: NavController) {
     val state by viewModel.verificationCodeState
 
     Column(
@@ -106,7 +112,7 @@ fun VerificationCodeScreen(viewModel: BookViewModel) {
             placeholder = { Text(text = "Verification Code") }
         )
 
-        Button(onClick = viewModel::verifyCode) {
+        Button(onClick = { navController.navigate(route = Screen.Verify.route)}) {
             Text(text = "Verify")
         }
     }

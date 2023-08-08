@@ -8,7 +8,7 @@ sealed class Screen(var route: String, var icon: Int, var title: String) {
     object Contact : Screen("contact", R.drawable.ic_contact, "Contact")
     object Detail : Screen("detail", 0, "Detail")
     object Login : Screen("login", 0, "login")
-    object SignUp : Screen("signUp", 0, "signUp")
-    object VerificationCode : Screen("verify", 0, "verify")
+    object SignUp : Screen("signup", 0, "signup")
+    object Verify : Screen("verify", 0, "verify")
 
 }
