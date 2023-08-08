@@ -55,7 +55,7 @@ fun CustomTopBar(titleText: String,  navController: NavController, amplifyServic
                 onClick = {
                     amplifyService.logOut {
                         MainScope().launch {
-                            navController.navigate(route = Screen.Search.route)
+                            navController.navigate(route = Screen.Login.route)
                         }
 
                     }
