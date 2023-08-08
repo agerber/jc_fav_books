@@ -29,15 +29,15 @@ fun Navigation(
 
     AnimatedNavHost(navController, startDestination = Screen.Login.route) {
         composable(Screen.Search.route) {
-            SearchScreen(bookViewModel, navController)
+            SearchScreen(bookViewModel, navController, amplifyService)
 
         }
         composable(Screen.Favorites.route) {
-            FavoritesScreen(navController)
+            FavoritesScreen(navController, amplifyService)
         }
 
         composable(Screen.Contact.route) {
-            ContactScreen(navController)
+            ContactScreen(navController, amplifyService)
         }
 
         composable(Screen.Detail.route,

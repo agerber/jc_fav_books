@@ -20,6 +20,7 @@ import edu.uchicago.gerber.favs.authorization.AmplifyServiceImpl
 import edu.uchicago.gerber.favs.presentation.navigation.Screen
 import edu.uchicago.gerber.favs.presentation.viewmodels.BookViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
 
@@ -57,7 +58,10 @@ fun SignUpScreen(viewModel: BookViewModel, navController: NavController, amplify
 
         Button(onClick = {
             amplifyService.signUp(viewModel.signUpState.value){
-                navController.navigate(route = Screen.SignUp.route)
+                MainScope().launch {
+                    navController.navigate(route = Screen.SignUp.route)
+                }
+
             }
 
 
@@ -94,7 +98,18 @@ fun LoginScreen(viewModel: BookViewModel, navController: NavController, amplifyS
             placeholder = { Text(text = "Password") }
         )
 
-        Button(onClick =   { navController.navigate(route = Screen.Login.route)}) {
+        Button(onClick =   {
+
+            amplifyService.login(viewModel.loginState.value){
+                MainScope().launch {
+                    navController.navigate(route = Screen.Search.route)
+                }
+
+            }
+
+        }
+
+        ) {
             Text(text = "Login")
         }
 
@@ -119,7 +134,16 @@ fun VerifyScreen(viewModel: BookViewModel, navController: NavController, amplify
             placeholder = { Text(text = "Verification Code") }
         )
 
-        Button(onClick = { navController.navigate(route = Screen.Verify.route)}) {
+        Button(onClick = {
+
+            amplifyService.verifyCode(viewModel.verificationCodeState.value){
+                MainScope().launch {
+                    navController.navigate(route = Screen.Login.route)
+                }
+
+            }
+
+        }) {
             Text(text = "Verify")
         }
     }

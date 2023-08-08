@@ -18,6 +18,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import edu.uchicago.gerber.favs.authorization.AmplifyService
 import edu.uchicago.gerber.favs.common.Constants
 import edu.uchicago.gerber.favs.presentation.screens.search.paging.BookList
 import edu.uchicago.gerber.favs.presentation.screens.search.paging.SearchOperation
@@ -31,6 +32,7 @@ import edu.uchicago.gerber.favs.presentation.widgets.CustomTopBar
 fun SearchScreen(
     bookViewModel: BookViewModel,
     navController: NavController,
+    amplifyService: AmplifyService
 ) {
     val state = bookViewModel.searchState.value
     val queryText = bookViewModel.queryText.value
@@ -39,7 +41,7 @@ fun SearchScreen(
         modifier = Constants.modifier,
         bottomBar = { CustomBottomNavigationBar(navController) },
         topBar = {
-            CustomTopBar(titleText = "Search Books")
+            CustomTopBar(titleText = "Search Books",navController=navController, amplifyService=amplifyService)
         }
     ) { paddingValues ->
         Column(

@@ -16,19 +16,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import edu.uchicago.gerber.favs.authorization.AmplifyService
 import edu.uchicago.gerber.favs.common.Constants
+import edu.uchicago.gerber.favs.presentation.viewmodels.BookViewModel
 import edu.uchicago.gerber.favs.presentation.widgets.CustomBottomNavigationBar
 import edu.uchicago.gerber.favs.presentation.widgets.CustomTopBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ContactScreen(navController: NavController) {
+fun ContactScreen( navController: NavController, amplifyService: AmplifyService) {
 
     Scaffold(
         modifier = Constants.modifier,
         bottomBar = { CustomBottomNavigationBar(navController) },
         topBar = {
-            CustomTopBar(titleText = "Contact Us")
+            CustomTopBar(titleText = "Contact Us", navController=navController, amplifyService=amplifyService)
         }
     ) {
             paddingValues ->

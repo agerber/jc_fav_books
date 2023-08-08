@@ -20,13 +20,19 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 import edu.uchicago.gerber.favs.R
+import edu.uchicago.gerber.favs.authorization.AmplifyService
+import edu.uchicago.gerber.favs.presentation.navigation.Screen
+import edu.uchicago.gerber.favs.presentation.viewmodels.BookViewModel
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CustomTopBar(titleText: String) {
+fun CustomTopBar(titleText: String,  navController: NavController, amplifyService: AmplifyService) {
       val context = LocalContext.current
       TopAppBar(
         colors = TopAppBarDefaults.smallTopAppBarColors(
@@ -47,10 +53,12 @@ fun CustomTopBar(titleText: String) {
             // RowScope here, so these icons will be placed horizontally
             IconButton(
                 onClick = {
-//                    AWSMobileClient.getInstance().signOut()
-//                    //force user back through the Auth
-//                    val intent = Intent(context, AuthActivity::class.java)
-//                    startActivity(context, intent, null)
+                    amplifyService.logOut {
+                        MainScope().launch {
+                            navController.navigate(route = Screen.Search.route)
+                        }
+
+                    }
 
                 }) {
                 Icon(
