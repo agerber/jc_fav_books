@@ -8,6 +8,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
+import edu.uchicago.gerber.favs.presentation.screens.auth.LoginScreen
 import edu.uchicago.gerber.favs.presentation.screens.contact.ContactScreen
 import edu.uchicago.gerber.favs.presentation.screens.details.DetailsScreen
 import edu.uchicago.gerber.favs.presentation.screens.favorites.FavoritesScreen
@@ -21,7 +22,7 @@ fun Navigation(
     bookViewModel: BookViewModel = viewModel()
 ) {
 
-    AnimatedNavHost(navController, startDestination = Screen.Search.route) {
+    AnimatedNavHost(navController, startDestination = Screen.Login.route) {
         composable(Screen.Search.route) {
             SearchScreen(bookViewModel, navController)
 
@@ -43,5 +44,21 @@ fun Navigation(
             },) {
             DetailsScreen(bookViewModel, navController)
         }
+
+        //routes for authorization
+        composable(Screen.Login.route) {
+            LoginScreen(bookViewModel)
+        }
+
+        composable(Screen.SignUp.route) {
+            LoginScreen(bookViewModel)
+        }
+
+        composable(Screen.VerificationCode.route) {
+            LoginScreen(bookViewModel)
+        }
+
+
+
     }
 }

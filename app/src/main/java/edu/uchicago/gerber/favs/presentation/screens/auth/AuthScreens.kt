@@ -13,25 +13,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import edu.uchicago.gerber.favs.presentation.viewmodels.BookViewModel
 
 
-@Composable
-fun SessionScreen(viewModel: AuthViewModel) {
-    Column(
-        verticalArrangement = Arrangement.spacedBy(10.dp, alignment = Alignment.CenterVertically),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Text(text = "YOU HAVE LOGGED IN")
-        Button(onClick = viewModel::logOut) {
-            Text("Log Out")
-        }
-    }
-}
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpScreen(viewModel: AuthViewModel) {
+fun SignUpScreen(viewModel: BookViewModel) {
     val state by viewModel.signUpState
 
     Column(
@@ -70,7 +59,7 @@ fun SignUpScreen(viewModel: AuthViewModel) {
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(viewModel: AuthViewModel) {
+fun LoginScreen(viewModel: BookViewModel) {
     val state by viewModel.loginState
 
     Column(
@@ -103,7 +92,7 @@ fun LoginScreen(viewModel: AuthViewModel) {
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun VerificationCodeScreen(viewModel: AuthViewModel) {
+fun VerificationCodeScreen(viewModel: BookViewModel) {
     val state by viewModel.verificationCodeState
 
     Column(
