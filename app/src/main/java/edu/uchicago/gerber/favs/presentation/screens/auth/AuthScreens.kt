@@ -98,6 +98,7 @@ fun LoginScreen(viewModel: BookViewModel, navController: NavController, amplifyS
         Button(onClick =   {
 
             amplifyService.login(viewModel.username.value, viewModel.password.value){
+                amplifyService.logUserAttributes()
                 MainScope().launch {
                     navigateAndPop(navController, Screen.Search.route)
                 }

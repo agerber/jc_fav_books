@@ -2,6 +2,8 @@ package edu.uchicago.gerber.favs.authorization
 
 import android.content.Context
 import android.util.Log
+import com.amplifyframework.auth.AuthException
+import com.amplifyframework.auth.AuthUserAttribute
 import com.amplifyframework.auth.AuthUserAttributeKey
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin
 import com.amplifyframework.auth.options.AuthSignUpOptions
@@ -18,6 +20,24 @@ class AmplifyService  {
         } catch (e: Exception) {
             Log.e("ampy", "Amplify configuration failed", e)
         }
+    }
+    fun logUserAttributes(): Unit {
+
+        Amplify.Auth.fetchUserAttributes(
+            { attributes: List<AuthUserAttribute?> ->
+                for (attribute in attributes) {
+                    Log.i("ampy", attribute!!.key.toString() + ":" + attribute.value)
+                }
+
+            }
+        ) { error: AuthException? ->
+            Log.e(
+                "ampy",
+                "Failed to fetch user attributes.",
+                error
+            )
+        }
+
     }
 
      fun signUp(username: String, email: String, password: String, onComplete: () -> Unit) {
