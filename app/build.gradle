@@ -94,4 +94,11 @@ dependencies {
 
     //Accompanist compose animation
     implementation "com.google.accompanist:accompanist-navigation-animation:0.23.1"
+
+    //cognito
+    implementation 'com.amplifyframework:aws-auth-cognito:1.36.2'
+
+
+
+
 }
