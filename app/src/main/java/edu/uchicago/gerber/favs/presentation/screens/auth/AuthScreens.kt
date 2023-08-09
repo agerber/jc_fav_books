@@ -64,7 +64,9 @@ fun SignUpScreen(viewModel: BookViewModel, navController: NavController, amplify
             Text(text = "Sign Up")
         }
 
-        TextButton(onClick = {navController.navigate(route = Screen.Login.route)}) {
+        TextButton(onClick = {
+            MainScope().launch {
+                  navController.navigate(route = Screen.Login.route)}}) {
             Text(text = "Already have an account? Login.")
         }
     }
@@ -108,7 +110,10 @@ fun LoginScreen(viewModel: BookViewModel, navController: NavController, amplifyS
             Text(text = "Login")
         }
 
-        TextButton(onClick = { navController.navigate(route = Screen.SignUp.route)}) {
+        TextButton(onClick = {
+            MainScope().launch {
+                 navController.navigate(route = Screen.SignUp.route)} }
+         ) {
             Text(text = "Don't have an account? Sign up.")
         }
     }
