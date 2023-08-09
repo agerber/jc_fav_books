@@ -8,6 +8,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
+import edu.uchicago.gerber.favs.authorization.AmplifyService
+import edu.uchicago.gerber.favs.presentation.screens.auth.LoginScreen
+import edu.uchicago.gerber.favs.presentation.screens.auth.SignUpScreen
+import edu.uchicago.gerber.favs.presentation.screens.auth.VerifyScreen
 import edu.uchicago.gerber.favs.presentation.screens.contact.ContactScreen
 import edu.uchicago.gerber.favs.presentation.screens.details.DetailsScreen
 import edu.uchicago.gerber.favs.presentation.screens.favorites.FavoritesScreen
@@ -18,20 +22,21 @@ import edu.uchicago.gerber.favs.presentation.viewmodels.BookViewModel
 @Composable
 fun Navigation(
     navController: NavHostController,
-    bookViewModel: BookViewModel = viewModel()
+    bookViewModel: BookViewModel = viewModel(),
+    amplifyService: AmplifyService
 ) {
 
-    AnimatedNavHost(navController, startDestination = Screen.Search.route) {
+    AnimatedNavHost(navController, startDestination = Screen.Login.route) {
         composable(Screen.Search.route) {
-            SearchScreen(bookViewModel, navController)
+            SearchScreen(bookViewModel, navController, amplifyService)
 
         }
         composable(Screen.Favorites.route) {
-            FavoritesScreen(navController)
+            FavoritesScreen(navController, amplifyService)
         }
 
         composable(Screen.Contact.route) {
-            ContactScreen(navController)
+            ContactScreen(navController, amplifyService)
         }
 
         composable(Screen.Detail.route,
