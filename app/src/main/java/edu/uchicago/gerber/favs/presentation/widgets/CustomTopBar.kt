@@ -53,8 +53,12 @@ fun CustomTopBar(titleText: String,  navController: NavController, amplifyServic
             // RowScope here, so these icons will be placed horizontally
             IconButton(
                 onClick = {
+                    amplifyService.logOut {
+                        MainScope().launch {
+                            navController.navigate(route = Screen.Login.route)
+                        }
 
-                    //todo log the user out
+                    }
 
                 }) {
                 Icon(
