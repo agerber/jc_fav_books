@@ -48,5 +48,21 @@ fun Navigation(
             },) {
             DetailsScreen(bookViewModel, navController)
         }
+
+        //routes for authorization
+        composable(Screen.Login.route) {
+            LoginScreen(bookViewModel, navController, amplifyService)
+        }
+
+        composable(Screen.SignUp.route) {
+            SignUpScreen(bookViewModel, navController, amplifyService)
+        }
+
+        composable(Screen.Verify.route) {
+            VerifyScreen(bookViewModel, navController, amplifyService)
+        }
+
+
+
     }
 }
