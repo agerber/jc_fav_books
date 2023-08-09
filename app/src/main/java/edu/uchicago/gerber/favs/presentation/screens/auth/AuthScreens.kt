@@ -54,7 +54,7 @@ fun SignUpScreen(viewModel: BookViewModel, navController: NavController, amplify
         Button(onClick = {
             amplifyService.signUp(viewModel.username.value, viewModel.email.value, viewModel.password.value){
                 MainScope().launch {
-                    navController.navigate(route = Screen.Verify.route)
+                    navigateAndPop(navController, Screen.Verify.route)
                 }
 
             }
@@ -66,7 +66,7 @@ fun SignUpScreen(viewModel: BookViewModel, navController: NavController, amplify
 
         TextButton(onClick = {
             MainScope().launch {
-                  navController.navigate(route = Screen.Login.route)}}) {
+                navigateAndPop(navController, Screen.Login.route)}}) {
             Text(text = "Already have an account? Login.")
         }
     }
@@ -99,7 +99,7 @@ fun LoginScreen(viewModel: BookViewModel, navController: NavController, amplifyS
 
             amplifyService.login(viewModel.username.value, viewModel.password.value){
                 MainScope().launch {
-                    navController.navigate(route = Screen.Search.route)
+                    navigateAndPop(navController, Screen.Search.route)
                 }
 
             }
@@ -112,7 +112,8 @@ fun LoginScreen(viewModel: BookViewModel, navController: NavController, amplifyS
 
         TextButton(onClick = {
             MainScope().launch {
-                 navController.navigate(route = Screen.SignUp.route)} }
+                navigateAndPop(navController, Screen.SignUp.route)} }
+
          ) {
             Text(text = "Don't have an account? Sign up.")
         }
@@ -138,7 +139,7 @@ fun VerifyScreen(viewModel: BookViewModel, navController: NavController, amplify
 
             amplifyService.verifyCode(viewModel.username.value, viewModel.code.value){
                 MainScope().launch {
-                    navController.navigate(route = Screen.Login.route)
+                    navigateAndPop(navController, Screen.Login.route)
                 }
 
             }
@@ -146,5 +147,23 @@ fun VerifyScreen(viewModel: BookViewModel, navController: NavController, amplify
         }) {
             Text(text = "Verify")
         }
+    }
+}
+
+fun navigateAndPop(navController: NavController, routeString:String){
+    navController.navigate(routeString) {
+        // Pop up to the start destination of the graph to
+        // avoid building up a large stack of destinations
+        // on the back stack as users select items
+        navController.graph.startDestinationRoute?.let { route ->
+            popUpTo(route) {
+                saveState = true
+            }
+        }
+        // Avoid multiple copies of the same destination when
+        // re-selecting the same item
+        launchSingleTop = true
+        // Restore state when reselecting a previously selected item
+        restoreState = true
     }
 }

@@ -25,6 +25,7 @@ import androidx.navigation.NavController
 import edu.uchicago.gerber.favs.R
 import edu.uchicago.gerber.favs.authorization.AmplifyService
 import edu.uchicago.gerber.favs.presentation.navigation.Screen
+import edu.uchicago.gerber.favs.presentation.screens.auth.navigateAndPop
 import edu.uchicago.gerber.favs.presentation.viewmodels.BookViewModel
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -55,7 +56,7 @@ fun CustomTopBar(titleText: String,  navController: NavController, amplifyServic
                 onClick = {
                     amplifyService.logOut {
                         MainScope().launch {
-                            navController.navigate(route = Screen.Login.route)
+                            navigateAndPop(navController, Screen.Login.route)
                         }
 
                     }
