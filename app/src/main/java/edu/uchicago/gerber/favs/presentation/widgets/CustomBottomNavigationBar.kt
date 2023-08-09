@@ -14,7 +14,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import edu.uchicago.gerber.favs.presentation.navigation.Screen
 
 @Composable
-fun BottomNavigationBar(navController: NavController) {
+fun CustomBottomNavigationBar(navController: NavController) {
     val tabs = listOf(
         Screen.Search,
         Screen.Favorites,

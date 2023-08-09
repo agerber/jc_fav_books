@@ -28,24 +28,9 @@ fun ContactScreen( navController: NavController, amplifyService: AmplifyService)
 
     Scaffold(
         modifier = Constants.modifier,
-        bottomBar = { BottomNavigationBar(navController) },
+        bottomBar = { CustomBottomNavigationBar(navController) },
         topBar = {
-            TopAppBar(
-                colors = TopAppBarDefaults.smallTopAppBarColors(
-                    containerColor = Color.Transparent
-                ),
-                title = {
-                    Text(
-                        text = "Contact Us",
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        style = TextStyle(color = Color.Black, fontWeight = FontWeight.Bold),
-                        textAlign = TextAlign.Center,
-                        fontSize = 20.sp
-                    )
-
-                }
-                )
+            CustomTopBar(titleText = "Contact Us", navController=navController, amplifyService=amplifyService)
         }
     ) {
             paddingValues ->
